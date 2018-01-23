@@ -55,20 +55,28 @@
 										<td>${item.title}</td>
 										<td>${item.link}</td>
 										<td>
-											<%--<t:auth url="/ad/modifyInit">--%>
+
 												<a href="javascript:void(0);" onclick="modifyInit('${item.id}')">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-											<%--</t:auth>--%>
-											<%--<t:auth url="/ad/remove">--%>
+
 												<a href="javascript:void(0);" onclick="remove('${item.id}')">删除</a>
-											<%--</t:auth>--%>
+
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						
 						<!-- 分页 -->
-
+						<div class="page fix">
+							<a href="${basePath}/ad/list?page=1" class="first">首页</a>
+							<c:if test="${pageInfo.hasPreviousPage}">
+							<a href="${basePath}/ad/list?page=${pageInfo.pageNum - 1}" class="pre">上一页</a>
+							</c:if>
+							当前第<span>${pageInfo.pageNum}/${pageInfo.pages}</span>页
+							<c:if test="${pageInfo.hasNextPage}">
+							<a href="${basePath}/ad/list?page=${pageInfo.pageNum + 1}" class="next">下一页</a>
+							</c:if>
+							<a href="${basePath}/ad/list?page=${pageInfo.pages}" class="last">末页</a>
+						</div>
 					</div>
 				</div>
 			</div>

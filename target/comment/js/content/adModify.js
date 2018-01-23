@@ -23,3 +23,8 @@ function modify() {
 function goback() {
 	location.href = $('#basePath').val() + '/ad';
 }
+function bao() {
+	$("#mainForm").attr("method","get");
+	$("#mainForm").submit();
+
+}

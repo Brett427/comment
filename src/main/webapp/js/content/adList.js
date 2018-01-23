@@ -18,5 +18,6 @@ function remove(id) {
 function modifyInit(id) {
 	$("#id").val(id);
 	$("#mainForm").attr("action",$("#basePath").val() + "/ad/modifyInit");
+	$("#mainForm").attr("method","get");
 	$("#mainForm").submit();
 }

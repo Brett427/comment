@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"/>
-	    <title>大众点评后台管理</title>
+	    <title>管理</title>
 	    <link href="${basePath}/css/all.css" rel="stylesheet" type="text/css"/>
 	    <link href="${basePath}/css/pop.css" rel="stylesheet" type="text/css"/>
 	    <link href="${basePath}/css/index.css" rel="stylesheet" type="text/css"/>
@@ -78,7 +78,7 @@
 		                <td class="leftTd" style="vertical-align:top" width="150">
 		                    <div class="left">
 		                        <div class="ileft" id="menuDiv">
-		                        	<h3 onclick="$('#mainPage').attr('src','${basePath}/ad/initList');"><a>广告页面</a></h3>
+		                        	<h3 onclick="$('#mainPage').attr('src','${basePath}/ad/list');"><a>广告页面</a></h3>
 		                        	<%--<h3 onclick="$('#mainPage').attr('src','${basePath}/content/initModify');"><a>维护页面</a></h3>--%>
 		                        </div>
 		                    </div>

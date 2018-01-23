@@ -1,5 +1,6 @@
 package org.sysu.service.Impl;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,10 +9,12 @@ import org.sysu.bean.Ad;
 import org.sysu.dao.AdDao;
 import org.sysu.dto.AdDto;
 import org.sysu.service.AdService;
+import org.sysu.utils.FileUtil;
 import sun.plugin2.util.SystemUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class AdServiceImpl implements AdService {
@@ -51,5 +54,51 @@ public class AdServiceImpl implements AdService {
             return false;
         }
 
+    }
+    @Override
+    public List<Ad> selectAd(AdDto adDto,int page,int rows) {
+        String title = adDto.getTitle();
+        PageHelper.startPage(page,rows);
+        List<Ad> ads =adDao.selectAd(title);
+        return ads;
+    }
+
+    @Override
+    public boolean remove(Long id) {
+        adDao.delete(id);
+        return true;
+    }
+
+    @Override
+    public AdDto getById(Long id) {
+        AdDto result =new AdDto();
+        Ad ad =adDao.selectById(id);
+        BeanUtils.copyProperties(ad,result);
+        result.setImg(adImageSavePAth + ad.getImgFileName());
+        return result;
+    }
+
+    @Override
+    public boolean modify(AdDto adDto) {
+        Ad ad = new Ad();
+        BeanUtils.copyProperties(adDto, ad);
+
+        String fileName = null;
+        if (adDto.getImgFile() != null && adDto.getImgFile().getSize() > 0) {
+            try {
+                fileName = FileUtil.save(adDto.getImgFile(), adImageSavePAth);
+                ad.setImgFileName(fileName);
+            } catch (IllegalStateException | IOException e) {
+                return false;
+            }
+        }
+        int updateCount = adDao.update(ad);
+        if (updateCount != 1) {
+            return false;
+        }
+        if (fileName != null) {
+            return FileUtil.delete(adImageSavePAth + adDto.getImgFile());
+        }
+        return true;
     }
 }
